@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace MyLibrary
 {
-    public partial class Form1 : Form
+    public partial class MainForm : Form
     {
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
+        }
+
+        private void btnAddBook_Click(object sender, EventArgs e)
+        {
+            AddBook addBook = new AddBook();
+            addBook.Show();
         }
     }
 }
