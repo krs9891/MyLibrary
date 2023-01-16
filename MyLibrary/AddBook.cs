@@ -14,54 +14,38 @@ namespace MyLibrary
 {
     public partial class AddBook : Form
     {
-        
-        public AddBook()
+        private MainForm _mainForm;
+        private Book book;
+        public AddBook(MainForm mainForm)
         {
+            _mainForm = mainForm;
             InitializeComponent();
-
         }
-        async void ISBNSearch(string isbn)
+        private async void btnSearchISBN_Click(object sender, EventArgs e)
         {
-            //create a HttpClient
-            using (var client = new HttpClient())
+            string ISBN = txtISBN.Text;
+            book = await Book.GetBookByISBN(ISBN);
+            if (book != null)
             {
-                //set the API endpoint
-                string url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + isbn;
-
-                //send a GET request to the API endpoint
-                var response = await client.GetAsync(url);
-
-                //read the JSON response as a string
-                var json = await response.Content.ReadAsStringAsync();
-
-                //deserialize the JSON string into a dynamic object
-                var bookData = JsonConvert.DeserializeObject<dynamic>(json);
-
-                //access the data you need, for example the title of the book
-                lblTitle.Text = bookData.items[0].volumeInfo.title;
-                lblAuthor.Text = bookData.items[0].volumeInfo.authors[0];
+                lblTitle.Text = book.Title;
+                lblAuthor.Text = book.Author;
+                
+                btnSave.Enabled = true;
             }
-        }
-
-        private void btnSearchISBN_Click(object sender, EventArgs e)
-        {
-            ISBNSearch(txtISBN.Text);
-
-            btnSave.Enabled = true;
+            else
+            {
+                MessageBox.Show("Book not found or an error occurred.");
+            }
         }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
-            Book book = new Book
-            {
-                Title = lblTitle.Text,
-                Author = lblAuthor.Text,
-                ISBN = txtISBN.Text
-            };
 
             LibraryDAO libraryDAO = new LibraryDAO();
             libraryDAO.AddBook(book);
-            
+
+            _mainForm.RefreshDataGridView();
+
             Dispose();
             MessageBox.Show("Book added to Library");
         }

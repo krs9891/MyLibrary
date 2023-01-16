@@ -33,6 +33,49 @@ namespace MyLibrary
                 con.Close();
             }
         }
+        public void DeleteBook(Book book)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM books WHERE id = @id", con))
+            {    
+                con.Open();
 
+                cmd.Parameters.AddWithValue("@id", book.Id);
+                cmd.ExecuteNonQuery();
+
+                con.Close();
+            }    
+            
+        }
+
+        public List<Book> GetAllBooks()
+        {
+            List<Book> returnThese = new List<Book>();
+            
+            string cmdText = "SELECT * FROM Books";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(cmdText, con))
+            {
+                con.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Book book = new Book
+                        {
+                            Id = reader.GetInt32(0),
+                            Title = reader.GetString(1),
+                            Author = reader.GetString(2),
+                            ISBN = reader.GetString(3)
+                        };
+                        returnThese.Add(book);
+                    }
+                }
+                con.Close();
+            }
+            return returnThese;
+        }
     }
 }
