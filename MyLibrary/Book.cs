@@ -15,6 +15,7 @@ namespace MyLibrary
         public string Title { get; set; }
         public string Author { get; set; }
         public string ISBN { get; set; }
+        public string CoverImageUrl { get; set; }
 
         public static async Task<Book> GetBookByISBN(string ISBN)
         {
@@ -52,6 +53,16 @@ namespace MyLibrary
                 book.Title = bookData.items[0].volumeInfo.title;
                 book.Author = bookData.items[0].volumeInfo.authors[0];
                 book.ISBN = ISBN;
+                if (bookData.items[0].volumeInfo.imageLinks != null)
+                {
+                    // get the thumbnail image url
+                    book.CoverImageUrl = bookData.items[0].volumeInfo.imageLinks.thumbnail;
+                }
+                else
+                {
+                    // set a default image url
+                    book.CoverImageUrl = "https://picsum.photos/200";
+                }
             }
             return book;
         }

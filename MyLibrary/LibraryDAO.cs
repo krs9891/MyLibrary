@@ -15,10 +15,9 @@ namespace MyLibrary
 
         public void AddBook(Book book)
         {
-
             string cmdText = @"insert into Books
-                   (Title,Author,ISBN)
-                   values(@Title, @Author, @ISBN)";
+               (Title,Author,ISBN,CoverImageUrl)
+               values(@Title, @Author, @ISBN, @CoverImageUrl)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(cmdText, con))
@@ -27,6 +26,7 @@ namespace MyLibrary
                 cmd.Parameters.AddWithValue("@Title", book.Title);
                 cmd.Parameters.AddWithValue("@Author", book.Author);
                 cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+                cmd.Parameters.AddWithValue("@CoverImageUrl", book.CoverImageUrl);
 
                 cmd.ExecuteNonQuery();
 
@@ -77,5 +77,63 @@ namespace MyLibrary
             }
             return returnThese;
         }
+
+        public List<Book> GetBooksBySearchPhrase(string searchPhrase)
+        {
+            List<Book> returnThese = new List<Book>();
+            string cmdText = "SELECT * FROM Books WHERE Title LIKE @SearchPhrase OR Author LIKE @SearchPhrase OR ISBN LIKE @SearchPhrase";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(cmdText, con))
+            {
+                cmd.Parameters.AddWithValue("@SearchPhrase", "%" + searchPhrase + "%");
+                con.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Book book = new Book
+                        {
+                            Id = reader.GetInt32(0),
+                            Title = reader.GetString(1),
+                            Author = reader.GetString(2),
+                            ISBN = reader.GetString(3)
+                        };
+                        returnThese.Add(book);
+                    }
+                }
+                con.Close();
+            }
+            return returnThese;
+        }
+
+        public Book GetBookById(int bookId)
+        {
+            Book book = new Book();
+            string cmdText = "SELECT * FROM Books WHERE Id = @bookId";
+
+            using (SqlConnection con = new SqlConnection(connectionString))
+            using (SqlCommand cmd = new SqlCommand(cmdText, con))
+            {
+                cmd.Parameters.AddWithValue("@bookId", bookId);
+                con.Open();
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        book.Id = reader.GetInt32(0);
+                        book.Title = reader.GetString(1);
+                        book.Author = reader.GetString(2);
+                        book.ISBN = reader.GetString(3);
+                    }
+                }
+                con.Close();
+            }
+            return book;
+        }
     }
 }
+
+

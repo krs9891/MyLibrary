@@ -30,6 +30,7 @@ namespace MyLibrary
                 lblTitle.Text = book.Title;
                 lblAuthor.Text = book.Author;
                 
+                
                 btnSave.Enabled = true;
             }
             else

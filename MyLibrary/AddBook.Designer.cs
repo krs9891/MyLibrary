@@ -36,6 +36,8 @@
             this.lblTitle = new System.Windows.Forms.Label();
             this.lblAuthor = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
+            this.picBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
@@ -111,11 +113,21 @@
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
+            // picBox1
+            // 
+            this.picBox1.Location = new System.Drawing.Point(506, 73);
+            this.picBox1.Name = "picBox1";
+            this.picBox1.Size = new System.Drawing.Size(100, 146);
+            this.picBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picBox1.TabIndex = 8;
+            this.picBox1.TabStop = false;
+            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(734, 427);
+            this.Controls.Add(this.picBox1);
             this.Controls.Add(this.btnSave);
             this.Controls.Add(this.lblAuthor);
             this.Controls.Add(this.lblTitle);
@@ -126,6 +138,7 @@
             this.Controls.Add(this.label1);
             this.Name = "AddBook";
             this.Text = "AddBook";
+            ((System.ComponentModel.ISupportInitialize)(this.picBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -141,5 +154,6 @@
         private System.Windows.Forms.Label lblTitle;
         private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Button btnSave;
+        private System.Windows.Forms.PictureBox picBox1;
     }
 }
