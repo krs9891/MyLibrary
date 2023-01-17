@@ -17,6 +17,9 @@ namespace MyLibrary
         {
             InitializeComponent();
             dataGridView = this.dataGridView1;
+            //to tez do podswietlania
+            dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
+
             RefreshDataGridView();
         }
 
@@ -45,13 +48,15 @@ namespace MyLibrary
             dt.Columns.Add("Id", typeof(int));
             dt.Columns.Add("Title", typeof(string));
             dt.Columns.Add("Author", typeof(string));
-            dt.Columns.Add("ISBN", typeof(string));
-            dt.Columns.Add("CoverImageUrl", typeof(string));
+            //dt.Columns.Add("ISBN", typeof(string));
+            //dt.Columns.Add("CoverImageUrl", typeof(string));
+            dt.Columns.Add("IsRead", typeof(bool));
             foreach (var book in books)
             {
-                dt.Rows.Add(book.Id, book.Title, book.Author, book.ISBN, book.CoverImageUrl);
+                dt.Rows.Add(book.Id, book.Title, book.Author, book.IsRead);
             }
             dataGridView1.DataSource = dt;
+            dataGridView1.Columns["IsRead"].ReadOnly = true;
         }
 
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -66,6 +71,23 @@ namespace MyLibrary
                     // Open the BookDetails form and pass the selected book's ID
                     BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBookId, this);
                     bookDetailsForm.ShowDialog();
+                }
+            }
+        }
+        //podswietlenie recordow
+        private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+        {
+            if (dataGridView1.Columns[e.ColumnIndex].Name == "IsRead")
+            {
+                if (e.Value != null)
+                {
+                    bool isRead = (e.Value == DBNull.Value) ? false : (bool)e.Value;
+                    if (isRead)
+                    {
+                        e.CellStyle.BackColor = Color.LightGreen;
+                        // set row color
+                        dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
+                    }
                 }
             }
         }

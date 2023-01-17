@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace MyLibrary
 {
@@ -15,9 +16,9 @@ namespace MyLibrary
 
         public void AddBook(Book book)
         {
-            string cmdText = @"insert into Books
-               (Title,Author,ISBN,CoverImageUrl)
-               values(@Title, @Author, @ISBN, @CoverImageUrl)";
+            string cmdText = @"insert into MyBooks
+               (Title,Author,ISBN,CoverImageUrl,IsRead)
+               values(@Title, @Author, @ISBN, @CoverImageUrl, @ISRead)";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(cmdText, con))
@@ -27,6 +28,7 @@ namespace MyLibrary
                 cmd.Parameters.AddWithValue("@Author", book.Author);
                 cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
                 cmd.Parameters.AddWithValue("@CoverImageUrl", book.CoverImageUrl);
+                cmd.Parameters.AddWithValue(@"IsRead", book.IsRead);
 
                 cmd.ExecuteNonQuery();
 
@@ -36,7 +38,7 @@ namespace MyLibrary
         public void DeleteBook(Book book)
         {
             using (SqlConnection con = new SqlConnection(connectionString))
-            using (SqlCommand cmd = new SqlCommand("DELETE FROM books WHERE id = @id", con))
+            using (SqlCommand cmd = new SqlCommand("DELETE FROM MyBooks WHERE id = @id", con))
             {    
                 con.Open();
 
@@ -51,8 +53,8 @@ namespace MyLibrary
         public List<Book> GetAllBooks()
         {
             List<Book> returnThese = new List<Book>();
-            
-            string cmdText = "SELECT * FROM Books";
+
+            string cmdText = "SELECT * FROM MyBooks";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(cmdText, con))
@@ -69,7 +71,8 @@ namespace MyLibrary
                             Title = reader.GetString(1),
                             Author = reader.GetString(2),
                             ISBN = reader.GetString(3),
-                            CoverImageUrl = reader.GetString(4)
+                            CoverImageUrl = reader.GetString(4),
+                            IsRead = reader.GetBoolean(5)
                         };
                         returnThese.Add(book);
                     }
@@ -79,10 +82,29 @@ namespace MyLibrary
             return returnThese;
         }
 
+        public void UpdateBook(Book book)
+        {
+            using (SqlConnection con = new SqlConnection(connectionString))
+            {
+                con.Open();
+                using (SqlCommand cmd = new SqlCommand("UPDATE MyBooks SET Title = @Title, Author = @Author, ISBN = @ISBN, CoverImageUrl = @CoverImageUrl, IsRead = @IsRead WHERE Id = @Id", con))
+                {
+                    cmd.Parameters.AddWithValue("@Title", book.Title);
+                    cmd.Parameters.AddWithValue("@Author", book.Author);
+                    cmd.Parameters.AddWithValue("@ISBN", book.ISBN);
+                    cmd.Parameters.AddWithValue("@CoverImageUrl", book.CoverImageUrl);
+                    cmd.Parameters.AddWithValue("@IsRead", book.IsRead);
+                    cmd.Parameters.AddWithValue("@Id", book.Id);
+                    cmd.ExecuteNonQuery();
+                }
+                con.Close();
+            }
+        }
+
         public List<Book> GetBooksBySearchPhrase(string searchPhrase)
         {
             List<Book> returnThese = new List<Book>();
-            string cmdText = "SELECT * FROM Books WHERE Title LIKE @SearchPhrase OR Author LIKE @SearchPhrase OR ISBN LIKE @SearchPhrase";
+            string cmdText = "SELECT * FROM MyBooks WHERE Title LIKE @SearchPhrase OR Author LIKE @SearchPhrase OR ISBN LIKE @SearchPhrase";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(cmdText, con))
@@ -100,7 +122,8 @@ namespace MyLibrary
                             Title = reader.GetString(1),
                             Author = reader.GetString(2),
                             ISBN = reader.GetString(3),
-                            CoverImageUrl= reader.GetString(4)
+                            CoverImageUrl= reader.GetString(4),
+                            IsRead = reader.HasRows ? reader.GetBoolean(5) : false
                         };
                         returnThese.Add(book);
                     }
@@ -113,7 +136,7 @@ namespace MyLibrary
         public Book GetBookById(int bookId)
         {
             Book book = new Book();
-            string cmdText = "SELECT * FROM Books WHERE Id = @bookId";
+            string cmdText = "SELECT * FROM MyBooks WHERE Id = @bookId";
 
             using (SqlConnection con = new SqlConnection(connectionString))
             using (SqlCommand cmd = new SqlCommand(cmdText, con))
@@ -130,11 +153,61 @@ namespace MyLibrary
                         book.Author = reader.GetString(2);
                         book.ISBN = reader.GetString(3);
                         book.CoverImageUrl = reader.GetString(4);
+                        book.IsRead = reader.HasRows ? reader.GetBoolean(5) : false;
                     }
                 }
                 con.Close();
             }
             return book;
+        }
+
+        public async Task<bool> PopulateTextboxesByISBNAsync(string ISBN, TextBox txtAddTitle, TextBox txtAddAuthor, TextBox txtAddImgUrl, CheckBox checkIsRead)
+        {
+            using (var client = new HttpClient())
+            {
+                // set the API endpoint
+                string url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN;
+
+                // send a GET request to the API endpoint
+                HttpResponseMessage response;
+                try
+                {
+                    response = await client.GetAsync(url);
+                }
+                catch (HttpRequestException ex)
+                {
+                    // handle exception when there is an error with the API call
+                    // for example, log the error or show a message to the user
+                    return false;
+                }
+
+                // read the JSON response as a string
+                var json = await response.Content.ReadAsStringAsync();
+
+                // deserialize the JSON string into a dynamic object
+                var bookData = JsonConvert.DeserializeObject<dynamic>(json);
+                if (bookData.totalItems == 0)
+                {
+                    // handle case when ISBN number is not found
+                    // for example, log the error or show a message to the user
+                    return false;
+                }
+                // access the data you need, for example the title of the book
+                txtAddTitle.Text = bookData.items[0].volumeInfo.title;
+                txtAddAuthor.Text = bookData.items[0].volumeInfo.authors[0];
+                if (bookData.items[0].volumeInfo.imageLinks != null)
+                {
+                    // get the thumbnail image url
+                    txtAddImgUrl.Text = bookData.items[0].volumeInfo.imageLinks.thumbnail;
+                }
+                else
+                {
+                    // set a default image url
+                    txtAddImgUrl.Text = "https://books.google.pl/googlebooks/images/no_cover_thumb.gif";
+                }
+                checkIsRead.Checked = false;
+            }
+            return true;
         }
     }
 }

@@ -16,7 +16,11 @@ namespace MyLibrary
         public string Author { get; set; }
         public string ISBN { get; set; }
         public string CoverImageUrl { get; set; }
+        public bool IsRead { get; set; } = false;
 
+
+
+        //ta funcja do kosza
         public static async Task<Book> GetBookByISBN(string ISBN)
         {
             Book book = new Book();

@@ -33,17 +33,24 @@
             this.btnSearchISBN = new System.Windows.Forms.Button();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.lblTitle = new System.Windows.Forms.Label();
-            this.lblAuthor = new System.Windows.Forms.Label();
             this.btnSave = new System.Windows.Forms.Button();
             this.picBox1 = new System.Windows.Forms.PictureBox();
+            this.txtAddTitle = new System.Windows.Forms.TextBox();
+            this.txtAddAuthor = new System.Windows.Forms.TextBox();
+            this.txtAddImgUrl = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.checkIsRead = new System.Windows.Forms.CheckBox();
+            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.radioButton2 = new System.Windows.Forms.RadioButton();
+            this.label5 = new System.Windows.Forms.Label();
+            this.btnImgRef = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.picBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(40, 31);
+            this.label1.Location = new System.Drawing.Point(51, 60);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 0;
@@ -51,14 +58,14 @@
             // 
             // txtISBN
             // 
-            this.txtISBN.Location = new System.Drawing.Point(90, 28);
+            this.txtISBN.Location = new System.Drawing.Point(101, 57);
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(161, 22);
             this.txtISBN.TabIndex = 1;
             // 
             // btnSearchISBN
             // 
-            this.btnSearchISBN.Location = new System.Drawing.Point(257, 28);
+            this.btnSearchISBN.Location = new System.Drawing.Point(268, 57);
             this.btnSearchISBN.Name = "btnSearchISBN";
             this.btnSearchISBN.Size = new System.Drawing.Size(75, 23);
             this.btnSearchISBN.TabIndex = 2;
@@ -69,7 +76,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(48, 102);
+            this.label2.Location = new System.Drawing.Point(59, 122);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 3;
@@ -78,34 +85,16 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(36, 150);
+            this.label3.Location = new System.Drawing.Point(47, 170);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 16);
             this.label3.TabIndex = 4;
             this.label3.Text = "Author:";
             // 
-            // lblTitle
-            // 
-            this.lblTitle.AutoSize = true;
-            this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(90, 95);
-            this.lblTitle.Name = "lblTitle";
-            this.lblTitle.Size = new System.Drawing.Size(0, 25);
-            this.lblTitle.TabIndex = 5;
-            // 
-            // lblAuthor
-            // 
-            this.lblAuthor.AutoSize = true;
-            this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthor.Location = new System.Drawing.Point(90, 143);
-            this.lblAuthor.Name = "lblAuthor";
-            this.lblAuthor.Size = new System.Drawing.Size(0, 25);
-            this.lblAuthor.TabIndex = 6;
-            // 
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(524, 358);
+            this.btnSave.Location = new System.Drawing.Point(491, 619);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
@@ -115,22 +104,110 @@
             // 
             // picBox1
             // 
-            this.picBox1.Location = new System.Drawing.Point(524, 54);
+            this.picBox1.Location = new System.Drawing.Point(491, 122);
             this.picBox1.Name = "picBox1";
             this.picBox1.Size = new System.Drawing.Size(100, 146);
             this.picBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picBox1.TabIndex = 8;
             this.picBox1.TabStop = false;
             // 
+            // txtAddTitle
+            // 
+            this.txtAddTitle.Location = new System.Drawing.Point(102, 115);
+            this.txtAddTitle.Name = "txtAddTitle";
+            this.txtAddTitle.Size = new System.Drawing.Size(241, 22);
+            this.txtAddTitle.TabIndex = 9;
+            // 
+            // txtAddAuthor
+            // 
+            this.txtAddAuthor.Location = new System.Drawing.Point(102, 163);
+            this.txtAddAuthor.Name = "txtAddAuthor";
+            this.txtAddAuthor.Size = new System.Drawing.Size(241, 22);
+            this.txtAddAuthor.TabIndex = 10;
+            // 
+            // txtAddImgUrl
+            // 
+            this.txtAddImgUrl.Location = new System.Drawing.Point(433, 57);
+            this.txtAddImgUrl.Name = "txtAddImgUrl";
+            this.txtAddImgUrl.Size = new System.Drawing.Size(218, 22);
+            this.txtAddImgUrl.TabIndex = 11;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(365, 59);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(62, 16);
+            this.label4.TabIndex = 12;
+            this.label4.Text = "Img URL:";
+            // 
+            // checkIsRead
+            // 
+            this.checkIsRead.AutoSize = true;
+            this.checkIsRead.Location = new System.Drawing.Point(101, 312);
+            this.checkIsRead.Name = "checkIsRead";
+            this.checkIsRead.Size = new System.Drawing.Size(108, 20);
+            this.checkIsRead.TabIndex = 13;
+            this.checkIsRead.Text = "Mark as read";
+            this.checkIsRead.UseVisualStyleBackColor = true;
+            // 
+            // radioButton1
+            // 
+            this.radioButton1.AutoSize = true;
+            this.radioButton1.Location = new System.Drawing.Point(101, 211);
+            this.radioButton1.Name = "radioButton1";
+            this.radioButton1.Size = new System.Drawing.Size(88, 20);
+            this.radioButton1.TabIndex = 14;
+            this.radioButton1.TabStop = true;
+            this.radioButton1.Text = "My Books";
+            this.radioButton1.UseVisualStyleBackColor = true;
+            // 
+            // radioButton2
+            // 
+            this.radioButton2.AutoSize = true;
+            this.radioButton2.Location = new System.Drawing.Point(101, 238);
+            this.radioButton2.Name = "radioButton2";
+            this.radioButton2.Size = new System.Drawing.Size(74, 20);
+            this.radioButton2.TabIndex = 15;
+            this.radioButton2.TabStop = true;
+            this.radioButton2.Text = "Wishlist";
+            this.radioButton2.UseVisualStyleBackColor = true;
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(12, 211);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(83, 16);
+            this.label5.TabIndex = 16;
+            this.label5.Text = "Add book to:";
+            // 
+            // btnImgRef
+            // 
+            this.btnImgRef.Location = new System.Drawing.Point(658, 56);
+            this.btnImgRef.Name = "btnImgRef";
+            this.btnImgRef.Size = new System.Drawing.Size(121, 23);
+            this.btnImgRef.TabIndex = 17;
+            this.btnImgRef.Text = "Refresh Image";
+            this.btnImgRef.UseVisualStyleBackColor = true;
+            this.btnImgRef.Click += new System.EventHandler(this.btnImgRef_Click);
+            // 
             // AddBook
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(734, 427);
+            this.ClientSize = new System.Drawing.Size(885, 683);
+            this.Controls.Add(this.btnImgRef);
+            this.Controls.Add(this.label5);
+            this.Controls.Add(this.radioButton2);
+            this.Controls.Add(this.radioButton1);
+            this.Controls.Add(this.checkIsRead);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtAddImgUrl);
+            this.Controls.Add(this.txtAddAuthor);
+            this.Controls.Add(this.txtAddTitle);
             this.Controls.Add(this.picBox1);
             this.Controls.Add(this.btnSave);
-            this.Controls.Add(this.lblAuthor);
-            this.Controls.Add(this.lblTitle);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.btnSearchISBN);
@@ -151,9 +228,16 @@
         private System.Windows.Forms.Button btnSearchISBN;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lblTitle;
-        private System.Windows.Forms.Label lblAuthor;
         private System.Windows.Forms.Button btnSave;
         private System.Windows.Forms.PictureBox picBox1;
+        private System.Windows.Forms.TextBox txtAddTitle;
+        private System.Windows.Forms.TextBox txtAddAuthor;
+        private System.Windows.Forms.TextBox txtAddImgUrl;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.CheckBox checkIsRead;
+        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton radioButton2;
+        private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.Button btnImgRef;
     }
 }
