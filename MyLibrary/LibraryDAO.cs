@@ -68,7 +68,8 @@ namespace MyLibrary
                             Id = reader.GetInt32(0),
                             Title = reader.GetString(1),
                             Author = reader.GetString(2),
-                            ISBN = reader.GetString(3)
+                            ISBN = reader.GetString(3),
+                            CoverImageUrl = reader.GetString(4)
                         };
                         returnThese.Add(book);
                     }
@@ -98,7 +99,8 @@ namespace MyLibrary
                             Id = reader.GetInt32(0),
                             Title = reader.GetString(1),
                             Author = reader.GetString(2),
-                            ISBN = reader.GetString(3)
+                            ISBN = reader.GetString(3),
+                            CoverImageUrl= reader.GetString(4)
                         };
                         returnThese.Add(book);
                     }
@@ -127,6 +129,7 @@ namespace MyLibrary
                         book.Title = reader.GetString(1);
                         book.Author = reader.GetString(2);
                         book.ISBN = reader.GetString(3);
+                        book.CoverImageUrl = reader.GetString(4);
                     }
                 }
                 con.Close();

@@ -61,7 +61,7 @@ namespace MyLibrary
                 else
                 {
                     // set a default image url
-                    book.CoverImageUrl = "https://picsum.photos/200";
+                    book.CoverImageUrl = "https://books.google.pl/googlebooks/images/no_cover_thumb.gif";
                 }
             }
             return book;

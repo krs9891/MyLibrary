@@ -29,7 +29,7 @@ namespace MyLibrary
             {
                 lblTitle.Text = book.Title;
                 lblAuthor.Text = book.Author;
-                
+                picBox1.Load(book.CoverImageUrl);
                 
                 btnSave.Enabled = true;
             }

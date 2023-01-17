@@ -36,6 +36,9 @@
             this.lblDetISBN = new System.Windows.Forms.Label();
             this.lblDetTitle = new System.Windows.Forms.Label();
             this.lblDetAuthor = new System.Windows.Forms.Label();
+            this.picBox2 = new System.Windows.Forms.PictureBox();
+            this.btnDelete = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // label3
@@ -114,11 +117,32 @@
             this.lblDetAuthor.TabIndex = 12;
             this.lblDetAuthor.Text = "label8";
             // 
+            // picBox2
+            // 
+            this.picBox2.Location = new System.Drawing.Point(557, 54);
+            this.picBox2.Name = "picBox2";
+            this.picBox2.Size = new System.Drawing.Size(159, 215);
+            this.picBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
+            this.picBox2.TabIndex = 13;
+            this.picBox2.TabStop = false;
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(557, 370);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(75, 23);
+            this.btnDelete.TabIndex = 14;
+            this.btnDelete.Text = "Delete";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // BookDetailsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.btnDelete);
+            this.Controls.Add(this.picBox2);
             this.Controls.Add(this.lblDetAuthor);
             this.Controls.Add(this.lblDetTitle);
             this.Controls.Add(this.lblDetISBN);
@@ -129,6 +153,7 @@
             this.Controls.Add(this.label1);
             this.Name = "BookDetailsForm";
             this.Text = "BookDetailsForm";
+            ((System.ComponentModel.ISupportInitialize)(this.picBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -144,5 +169,7 @@
         private System.Windows.Forms.Label lblDetISBN;
         private System.Windows.Forms.Label lblDetTitle;
         private System.Windows.Forms.Label lblDetAuthor;
+        private System.Windows.Forms.PictureBox picBox2;
+        private System.Windows.Forms.Button btnDelete;
     }
 }

@@ -43,7 +43,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(89, 30);
+            this.label1.Location = new System.Drawing.Point(40, 31);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(44, 16);
             this.label1.TabIndex = 0;
@@ -51,14 +51,14 @@
             // 
             // txtISBN
             // 
-            this.txtISBN.Location = new System.Drawing.Point(139, 27);
+            this.txtISBN.Location = new System.Drawing.Point(90, 28);
             this.txtISBN.Name = "txtISBN";
             this.txtISBN.Size = new System.Drawing.Size(161, 22);
             this.txtISBN.TabIndex = 1;
             // 
             // btnSearchISBN
             // 
-            this.btnSearchISBN.Location = new System.Drawing.Point(306, 27);
+            this.btnSearchISBN.Location = new System.Drawing.Point(257, 28);
             this.btnSearchISBN.Name = "btnSearchISBN";
             this.btnSearchISBN.Size = new System.Drawing.Size(75, 23);
             this.btnSearchISBN.TabIndex = 2;
@@ -69,7 +69,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(97, 101);
+            this.label2.Location = new System.Drawing.Point(48, 102);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(36, 16);
             this.label2.TabIndex = 3;
@@ -78,7 +78,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(85, 149);
+            this.label3.Location = new System.Drawing.Point(36, 150);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(48, 16);
             this.label3.TabIndex = 4;
@@ -88,7 +88,7 @@
             // 
             this.lblTitle.AutoSize = true;
             this.lblTitle.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTitle.Location = new System.Drawing.Point(139, 94);
+            this.lblTitle.Location = new System.Drawing.Point(90, 95);
             this.lblTitle.Name = "lblTitle";
             this.lblTitle.Size = new System.Drawing.Size(0, 25);
             this.lblTitle.TabIndex = 5;
@@ -97,7 +97,7 @@
             // 
             this.lblAuthor.AutoSize = true;
             this.lblAuthor.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblAuthor.Location = new System.Drawing.Point(139, 142);
+            this.lblAuthor.Location = new System.Drawing.Point(90, 143);
             this.lblAuthor.Name = "lblAuthor";
             this.lblAuthor.Size = new System.Drawing.Size(0, 25);
             this.lblAuthor.TabIndex = 6;
@@ -105,7 +105,7 @@
             // btnSave
             // 
             this.btnSave.Enabled = false;
-            this.btnSave.Location = new System.Drawing.Point(342, 331);
+            this.btnSave.Location = new System.Drawing.Point(524, 358);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(75, 23);
             this.btnSave.TabIndex = 7;
@@ -115,7 +115,7 @@
             // 
             // picBox1
             // 
-            this.picBox1.Location = new System.Drawing.Point(506, 73);
+            this.picBox1.Location = new System.Drawing.Point(524, 54);
             this.picBox1.Name = "picBox1";
             this.picBox1.Size = new System.Drawing.Size(100, 146);
             this.picBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;

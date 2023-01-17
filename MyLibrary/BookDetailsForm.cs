@@ -12,7 +12,8 @@ namespace MyLibrary
 {
     public partial class BookDetailsForm : Form
     {
-        public BookDetailsForm(int selectedBookId)
+        private MainForm _mainForm;
+        public BookDetailsForm(int selectedBookId, MainForm mainForm)
         {
             InitializeComponent();
             LibraryDAO libraryDAO = new LibraryDAO();
@@ -21,6 +22,22 @@ namespace MyLibrary
             lblDetISBN.Text = book.ISBN;
             lblDetTitle.Text = book.Title;
             lblDetAuthor.Text = book.Author;
+            picBox2.Load(book.CoverImageUrl);
+            _mainForm = mainForm;
+        }
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            int bookId = int.Parse(lblDetId.Text);
+            LibraryDAO libraryDAO = new LibraryDAO();
+            Book book = libraryDAO.GetBookById(bookId);
+
+            DialogResult result = MessageBox.Show("Are you sure you want to delete the selected book?", "Confirmation", MessageBoxButtons.YesNo);
+            if (result == DialogResult.Yes)
+            {
+                libraryDAO.DeleteBook(book);
+                _mainForm.RefreshDataGridView();
+                this.Dispose();
+            }
         }
     }
 }

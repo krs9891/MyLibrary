@@ -46,9 +46,10 @@ namespace MyLibrary
             dt.Columns.Add("Title", typeof(string));
             dt.Columns.Add("Author", typeof(string));
             dt.Columns.Add("ISBN", typeof(string));
+            dt.Columns.Add("CoverImageUrl", typeof(string));
             foreach (var book in books)
             {
-                dt.Rows.Add(book.Id, book.Title, book.Author, book.ISBN);
+                dt.Rows.Add(book.Id, book.Title, book.Author, book.ISBN, book.CoverImageUrl);
             }
             dataGridView1.DataSource = dt;
         }
@@ -63,7 +64,7 @@ namespace MyLibrary
                     int selectedBookId = (int)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
 
                     // Open the BookDetails form and pass the selected book's ID
-                    BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBookId);
+                    BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBookId, this);
                     bookDetailsForm.ShowDialog();
                 }
             }
