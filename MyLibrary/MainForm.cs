@@ -19,7 +19,9 @@ namespace MyLibrary
             dataGridView = this.dataGridView1;
             //to tez do podswietlania
             dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
-
+            
+            DisplayViews();
+            
             RefreshDataGridView();
         }
 
@@ -32,18 +34,32 @@ namespace MyLibrary
         private void btnSearchBook_Click(object sender, EventArgs e)
         {
             string searchPhrase = txtSearch.Text;
-            UpdateDataGridView(searchPhrase);
+            string selectedView = cboView.SelectedItem.ToString();
+            UpdateDataGridView(searchPhrase, selectedView);
         }
 
         public void RefreshDataGridView()
         {
-            UpdateDataGridView(string.Empty);
+            string selectedView = cboView.SelectedItem.ToString();
+            UpdateDataGridView(string.Empty, selectedView);
         }
 
-        private void UpdateDataGridView(string searchPhrase)
+        private void UpdateDataGridView(string searchPhrase, string selectedView)
         {
             LibraryDAO libraryDAO = new LibraryDAO();
-            List<Book> books = string.IsNullOrEmpty(searchPhrase) ? libraryDAO.GetAllBooks() : libraryDAO.GetBooksBySearchPhrase(searchPhrase);
+            List<Book> books = new List<Book>();
+            if (selectedView == "All my books")
+            {
+                books = string.IsNullOrEmpty(searchPhrase) ? libraryDAO.GetAllBooks() : libraryDAO.GetBooksBySearchPhrase(searchPhrase);
+            }
+            else if (selectedView == "To Read")
+            {
+                books = string.IsNullOrEmpty(searchPhrase) ? libraryDAO.GetToReadBooks() : libraryDAO.GetToReadBooksBySearchPhrase(searchPhrase);
+            }
+            else if (selectedView == "Already Read")
+            {
+                books = string.IsNullOrEmpty(searchPhrase) ? libraryDAO.GetAlreadyReadBooks() : libraryDAO.GetAlreadyReadBooksBySearchPhrase(searchPhrase);
+            }
             DataTable dt = new DataTable();
             dt.Columns.Add("Id", typeof(int));
             dt.Columns.Add("Title", typeof(string));
@@ -51,9 +67,12 @@ namespace MyLibrary
             //dt.Columns.Add("ISBN", typeof(string));
             //dt.Columns.Add("CoverImageUrl", typeof(string));
             dt.Columns.Add("IsRead", typeof(bool));
-            foreach (var book in books)
+            if (books != null)
             {
-                dt.Rows.Add(book.Id, book.Title, book.Author, book.IsRead);
+                foreach (var book in books)
+                {
+                    dt.Rows.Add(book.Id, book.Title, book.Author, book.IsRead);
+                }
             }
             dataGridView1.DataSource = dt;
             dataGridView1.Columns["IsRead"].ReadOnly = true;
@@ -91,7 +110,18 @@ namespace MyLibrary
                 }
             }
         }
+        private void DisplayViews()
+        {
+            List<string> views = new List<string> { "All my books", "To Read", "Already Read" };
+            cboView.DataSource = views;
+            string selectedView = cboView.SelectedItem.ToString();
+        }
+        private void cboView_SelectionChangeCommitted(object sender, EventArgs e)
+        {
+            string selectedView = cboView.SelectedItem.ToString();
+            string searchPhrase = txtSearch.Text;
+            UpdateDataGridView(searchPhrase, selectedView);
+        }
+        
     }
-
-
 }

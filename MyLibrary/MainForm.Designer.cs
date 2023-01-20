@@ -32,6 +32,8 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.txtSearch = new System.Windows.Forms.TextBox();
             this.btnSearchBook = new System.Windows.Forms.Button();
+            this.cboView = new System.Windows.Forms.ComboBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,26 +49,26 @@
             // 
             // dataGridView1
             // 
-            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
+            this.dataGridView1.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(13, 57);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 51;
             this.dataGridView1.RowTemplate.Height = 24;
-            this.dataGridView1.Size = new System.Drawing.Size(1606, 377);
+            this.dataGridView1.Size = new System.Drawing.Size(889, 377);
             this.dataGridView1.TabIndex = 1;
             this.dataGridView1.CellDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellDoubleClick);
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(205, 13);
+            this.txtSearch.Location = new System.Drawing.Point(123, 13);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(272, 22);
             this.txtSearch.TabIndex = 2;
             // 
             // btnSearchBook
             // 
-            this.btnSearchBook.Location = new System.Drawing.Point(483, 13);
+            this.btnSearchBook.Location = new System.Drawing.Point(401, 13);
             this.btnSearchBook.Name = "btnSearchBook";
             this.btnSearchBook.Size = new System.Drawing.Size(75, 23);
             this.btnSearchBook.TabIndex = 3;
@@ -74,11 +76,32 @@
             this.btnSearchBook.UseVisualStyleBackColor = true;
             this.btnSearchBook.Click += new System.EventHandler(this.btnSearchBook_Click);
             // 
+            // cboView
+            // 
+            this.cboView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cboView.FormattingEnabled = true;
+            this.cboView.Location = new System.Drawing.Point(569, 11);
+            this.cboView.Name = "cboView";
+            this.cboView.Size = new System.Drawing.Size(121, 24);
+            this.cboView.TabIndex = 4;
+            this.cboView.SelectionChangeCommitted += new System.EventHandler(this.cboView_SelectionChangeCommitted);
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(520, 16);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(43, 16);
+            this.label1.TabIndex = 5;
+            this.label1.Text = "Show:";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1645, 632);
+            this.ClientSize = new System.Drawing.Size(914, 459);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.cboView);
             this.Controls.Add(this.btnSearchBook);
             this.Controls.Add(this.txtSearch);
             this.Controls.Add(this.dataGridView1);
@@ -97,6 +120,8 @@
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.TextBox txtSearch;
         private System.Windows.Forms.Button btnSearchBook;
+        private System.Windows.Forms.ComboBox cboView;
+        private System.Windows.Forms.Label label1;
     }
 }
 

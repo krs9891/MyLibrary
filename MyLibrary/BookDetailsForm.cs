@@ -13,31 +13,31 @@ namespace MyLibrary
     public partial class BookDetailsForm : Form
     {
         private MainForm _mainForm;
+        private LibraryDAO _libraryDAO;
         public BookDetailsForm(int selectedBookId, MainForm mainForm)
         {
             InitializeComponent();
             _mainForm = mainForm;
 
-            LibraryDAO libraryDAO = new LibraryDAO();
-            Book book = libraryDAO.GetBookById(selectedBookId);
+            _libraryDAO = new LibraryDAO();
+            Book book = _libraryDAO.GetBookById(selectedBookId);
 
             PopulateForm(book);
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int bookId = int.Parse(lblDetId.Text);
-            LibraryDAO libraryDAO = new LibraryDAO();
-            Book book = libraryDAO.GetBookById(bookId);
+            //LibraryDAO libraryDAO = new LibraryDAO();
+            Book book = _libraryDAO.GetBookById(bookId);
 
             DialogResult result = MessageBox.Show("Are you sure you want to delete the selected book?", "Confirmation", MessageBoxButtons.YesNo);
             if (result == DialogResult.Yes)
             {
-                libraryDAO.DeleteBook(book);
+                _libraryDAO.DeleteBook(book);
                 _mainForm.RefreshDataGridView();
                 this.Dispose();
             }
         }
-        //miss click
         private void BookDetailsForm_Load(object sender, EventArgs e)
         {
 
@@ -110,6 +110,19 @@ namespace MyLibrary
         private void btnClose_Click(object sender, EventArgs e)
         {
             Dispose();
+        }
+
+        private void btnDetLoadImg_Click(object sender, EventArgs e)
+        {
+            if (_libraryDAO.IsValidUrl(txtDetImgUrl.Text))
+            {
+                picBox2.Load(txtDetImgUrl.Text);
+            }
+            else
+            {
+                MessageBox.Show("Image URL is not valid");
+                txtDetImgUrl.Text = picBox2.ImageLocation;
+            }
         }
     }
 }

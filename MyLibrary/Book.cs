@@ -17,58 +17,5 @@ namespace MyLibrary
         public string ISBN { get; set; }
         public string CoverImageUrl { get; set; }
         public bool IsRead { get; set; } = false;
-
-
-
-        //ta funcja do kosza
-        public static async Task<Book> GetBookByISBN(string ISBN)
-        {
-            Book book = new Book();
-            using (var client = new HttpClient())
-            {
-                // set the API endpoint
-                string url = "https://www.googleapis.com/books/v1/volumes?q=isbn:" + ISBN;
-
-                // send a GET request to the API endpoint
-                HttpResponseMessage response;
-                try
-                {
-                    response = await client.GetAsync(url);
-                }
-                catch (HttpRequestException ex)
-                {
-                    // handle exception when there is an error with the API call
-                    // for example, log the error or show a message to the user
-                    return null;
-                }
-
-                // read the JSON response as a string
-                var json = await response.Content.ReadAsStringAsync();
-
-                // deserialize the JSON string into a dynamic object
-                var bookData = JsonConvert.DeserializeObject<dynamic>(json);
-                if (bookData.totalItems == 0)
-                {
-                    // handle case when ISBN number is not found
-                    // for example, log the error or show a message to the user
-                    return null;
-                }
-                // access the data you need, for example the title of the book
-                book.Title = bookData.items[0].volumeInfo.title;
-                book.Author = bookData.items[0].volumeInfo.authors[0];
-                book.ISBN = ISBN;
-                if (bookData.items[0].volumeInfo.imageLinks != null)
-                {
-                    // get the thumbnail image url
-                    book.CoverImageUrl = bookData.items[0].volumeInfo.imageLinks.thumbnail;
-                }
-                else
-                {
-                    // set a default image url
-                    book.CoverImageUrl = "https://books.google.pl/googlebooks/images/no_cover_thumb.gif";
-                }
-            }
-            return book;
-        }
     }
 }

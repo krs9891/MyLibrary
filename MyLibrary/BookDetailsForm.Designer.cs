@@ -97,9 +97,10 @@
             // 
             // picBox2
             // 
-            this.picBox2.Location = new System.Drawing.Point(473, 107);
+            this.picBox2.Location = new System.Drawing.Point(497, 113);
+            this.picBox2.MaximumSize = new System.Drawing.Size(160, 215);
             this.picBox2.Name = "picBox2";
-            this.picBox2.Size = new System.Drawing.Size(159, 215);
+            this.picBox2.Size = new System.Drawing.Size(160, 215);
             this.picBox2.SizeMode = System.Windows.Forms.PictureBoxSizeMode.AutoSize;
             this.picBox2.TabIndex = 13;
             this.picBox2.TabStop = false;
@@ -164,6 +165,7 @@
             this.btnDetLoadImg.TabIndex = 20;
             this.btnDetLoadImg.Text = "Load Image";
             this.btnDetLoadImg.UseVisualStyleBackColor = true;
+            this.btnDetLoadImg.Click += new System.EventHandler(this.btnDetLoadImg_Click);
             // 
             // btnDetEdit
             // 
@@ -222,7 +224,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 495);
+            this.ClientSize = new System.Drawing.Size(718, 495);
             this.Controls.Add(this.btnClose);
             this.Controls.Add(this.checkDetIsRead);
             this.Controls.Add(this.btnCnl);

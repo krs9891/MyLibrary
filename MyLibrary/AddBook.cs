@@ -21,6 +21,7 @@ namespace MyLibrary
             _mainForm = mainForm;
             _libraryDAO = new LibraryDAO();
             InitializeComponent();
+            picBox1.Load(_libraryDAO.defaultImgUrl);
         }
         private async void btnSearchISBN_Click(object sender, EventArgs e)
         {
@@ -46,16 +47,23 @@ namespace MyLibrary
             book.IsRead = checkIsRead.Checked;
 
             _libraryDAO.AddBook(book);
-
             _mainForm.RefreshDataGridView();
-
             Dispose();
             MessageBox.Show("Book added to Library");
         }
 
         private void btnImgRef_Click(object sender, EventArgs e)
         {
-            picBox1.Load(txtAddImgUrl.Text);
+            if (_libraryDAO.IsValidUrl(txtAddImgUrl.Text))
+            {
+                picBox1.Load(txtAddImgUrl.Text);
+            }
+            else
+            {
+                MessageBox.Show("Image URL not valid");
+                txtAddImgUrl.Text = picBox1.ImageLocation;
+            }
+
         }
     }
 }
