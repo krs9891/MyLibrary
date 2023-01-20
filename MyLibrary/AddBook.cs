@@ -63,7 +63,6 @@ namespace MyLibrary
                 MessageBox.Show("Image URL not valid");
                 txtAddImgUrl.Text = picBox1.ImageLocation;
             }
-
         }
     }
 }

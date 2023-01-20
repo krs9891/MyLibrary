@@ -18,16 +18,13 @@ namespace MyLibrary
         {
             InitializeComponent();
             _mainForm = mainForm;
-
             _libraryDAO = new LibraryDAO();
             Book book = _libraryDAO.GetBookById(selectedBookId);
-
             PopulateForm(book);
         }
         private void btnDelete_Click(object sender, EventArgs e)
         {
             int bookId = int.Parse(lblDetId.Text);
-            //LibraryDAO libraryDAO = new LibraryDAO();
             Book book = _libraryDAO.GetBookById(bookId);
 
             DialogResult result = MessageBox.Show("Are you sure you want to delete the selected book?", "Confirmation", MessageBoxButtons.YesNo);
@@ -51,7 +48,6 @@ namespace MyLibrary
         private void btnCnl_Click(object sender, EventArgs e)
         {
             AllowEdit(false);
-
             LibraryDAO libraryDAO = new LibraryDAO();
             int selectedBookId = int.Parse(lblDetId.Text);
             Book book = libraryDAO.GetBookById(selectedBookId);
@@ -64,19 +60,20 @@ namespace MyLibrary
             if (result == DialogResult.Yes)
             {
                 int bookId = int.Parse(lblDetId.Text);
-                Book book = new Book();
-                book.Id = bookId;
-                book.Title = txtDetTitle.Text;
-                book.Author = txtDetAuthor.Text;
-                book.ISBN = txtDetISBN.Text;
-                book.CoverImageUrl = txtDetImgUrl.Text;
-                book.IsRead = checkDetIsRead.Checked;
+                Book book = new Book
+                {
+                    Id = bookId,
+                    Title = txtDetTitle.Text,
+                    Author = txtDetAuthor.Text,
+                    ISBN = txtDetISBN.Text,
+                    CoverImageUrl = txtDetImgUrl.Text,
+                    IsRead = checkDetIsRead.Checked
+                };
 
                 LibraryDAO libraryDAO = new LibraryDAO();
                 libraryDAO.UpdateBook(book);
 
                 _mainForm.RefreshDataGridView();
-
                 AllowEdit(false);
             }
         }
@@ -89,11 +86,9 @@ namespace MyLibrary
             txtDetImgUrl.Enabled = enable;
             btnDetLoadImg.Enabled = enable;
             checkDetIsRead.Enabled = enable;
-
             btnApply.Enabled = enable;
             btnDelete.Enabled = !enable;
             btnCnl.Enabled = enable;
-            btnClose.Enabled = !enable;
         }
 
         private void PopulateForm(Book book)

@@ -17,11 +17,8 @@ namespace MyLibrary
         {
             InitializeComponent();
             dataGridView = this.dataGridView1;
-            //to tez do podswietlania
             dataGridView1.CellFormatting += new DataGridViewCellFormattingEventHandler(dataGridView1_CellFormatting);
-            
             DisplayViews();
-            
             RefreshDataGridView();
         }
 
@@ -81,30 +78,25 @@ namespace MyLibrary
         private void dataGridView1_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             {
-                // Make sure the user double-clicked a row (and not a column header)
                 if (e.RowIndex >= 0)
                 {
-                    // Get the selected book's ID
                     int selectedBookId = (int)dataGridView1.Rows[e.RowIndex].Cells["Id"].Value;
-
-                    // Open the BookDetails form and pass the selected book's ID
                     BookDetailsForm bookDetailsForm = new BookDetailsForm(selectedBookId, this);
                     bookDetailsForm.ShowDialog();
                 }
             }
         }
-        //podswietlenie recordow
+
         private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
             if (dataGridView1.Columns[e.ColumnIndex].Name == "IsRead")
             {
                 if (e.Value != null)
                 {
-                    bool isRead = (e.Value == DBNull.Value) ? false : (bool)e.Value;
+                    bool isRead = e.Value != DBNull.Value && (bool)e.Value;
                     if (isRead)
                     {
                         e.CellStyle.BackColor = Color.LightGreen;
-                        // set row color
                         dataGridView1.Rows[e.RowIndex].DefaultCellStyle.BackColor = Color.LightGreen;
                     }
                 }
@@ -114,7 +106,6 @@ namespace MyLibrary
         {
             List<string> views = new List<string> { "All my books", "To Read", "Already Read" };
             cboView.DataSource = views;
-            string selectedView = cboView.SelectedItem.ToString();
         }
         private void cboView_SelectionChangeCommitted(object sender, EventArgs e)
         {
@@ -122,6 +113,5 @@ namespace MyLibrary
             string searchPhrase = txtSearch.Text;
             UpdateDataGridView(searchPhrase, selectedView);
         }
-        
     }
 }

@@ -61,14 +61,14 @@
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(123, 13);
+            this.txtSearch.Location = new System.Drawing.Point(217, 15);
             this.txtSearch.Name = "txtSearch";
             this.txtSearch.Size = new System.Drawing.Size(272, 22);
             this.txtSearch.TabIndex = 2;
             // 
             // btnSearchBook
             // 
-            this.btnSearchBook.Location = new System.Drawing.Point(401, 13);
+            this.btnSearchBook.Location = new System.Drawing.Point(495, 15);
             this.btnSearchBook.Name = "btnSearchBook";
             this.btnSearchBook.Size = new System.Drawing.Size(75, 23);
             this.btnSearchBook.TabIndex = 3;
@@ -80,7 +80,7 @@
             // 
             this.cboView.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cboView.FormattingEnabled = true;
-            this.cboView.Location = new System.Drawing.Point(569, 11);
+            this.cboView.Location = new System.Drawing.Point(781, 13);
             this.cboView.Name = "cboView";
             this.cboView.Size = new System.Drawing.Size(121, 24);
             this.cboView.TabIndex = 4;
@@ -89,7 +89,7 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(520, 16);
+            this.label1.Location = new System.Drawing.Point(732, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 16);
             this.label1.TabIndex = 5;

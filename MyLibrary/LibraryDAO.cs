@@ -14,7 +14,7 @@ namespace MyLibrary
     public class LibraryDAO
     {
         public string defaultImgUrl = "https://books.google.pl/googlebooks/images/no_cover_thumb.gif";
-        string connectionString = "Server=tcp:wsb-projects.database.windows.net,1433;Initial Catalog=MyLibrary;Persist Security Info=False;User ID=admin1;Password=zaq1@WSX;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        readonly string connectionString = "Server=tcp:wsb-projects.database.windows.net,1433;Initial Catalog=MyLibrary;Persist Security Info=False;User ID=admin1;Password=zaq1@WSX;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
         
         public async Task<bool> PopulateTextboxesByISBNAsync(string ISBN, TextBox txtAddTitle, TextBox txtAddAuthor, TextBox txtAddImgUrl, CheckBox checkIsRead)
         {
@@ -160,7 +160,7 @@ namespace MyLibrary
                         book.Author = reader.GetString(2);
                         book.ISBN = reader.GetString(3);
                         book.CoverImageUrl = reader.GetString(4);
-                        book.IsRead = reader.HasRows ? reader.GetBoolean(5) : false;
+                        book.IsRead = reader.GetBoolean(5);
                     }
                 }
                 con.Close();
@@ -218,7 +218,7 @@ namespace MyLibrary
                             Author = reader.GetString(2),
                             ISBN = reader.GetString(3),
                             CoverImageUrl = reader.GetString(4),
-                            IsRead = reader.HasRows ? reader.GetBoolean(5) : false
+                            IsRead = reader.GetBoolean(5)
                         };
                         returnThese.Add(book);
                     }
@@ -248,7 +248,7 @@ namespace MyLibrary
                             Author = reader.GetString(2),
                             ISBN = reader.GetString(3),
                             CoverImageUrl = reader.GetString(4),
-                            IsRead = reader.HasRows ? reader.GetBoolean(5) : false
+                            IsRead = reader.GetBoolean(5)
                         };
                         returnThese.Add(book);
                     }
@@ -282,7 +282,7 @@ namespace MyLibrary
                             Author = reader.GetString(2),
                             ISBN = reader.GetString(3),
                             CoverImageUrl= reader.GetString(4),
-                            IsRead = reader.HasRows ? reader.GetBoolean(5) : false
+                            IsRead = reader.GetBoolean(5)
                         };
                         returnThese.Add(book);
                     }
