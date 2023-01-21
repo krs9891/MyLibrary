@@ -22,6 +22,12 @@ namespace MyLibrary
             _libraryDAO = new LibraryDAO();
             InitializeComponent();
             picBox1.Load(_libraryDAO.defaultImgUrl);
+            txtAddImgUrl.Text = _libraryDAO.defaultImgUrl;
+
+            txtAddTitle.TextChanged += TextBox_TextChanged;
+            txtAddAuthor.TextChanged += TextBox_TextChanged;
+            txtAddImgUrl.TextChanged += TextBox_TextChanged;
+            txtISBN.TextChanged += TextBox_TextChanged;
         }
         private async void btnSearchISBN_Click(object sender, EventArgs e)
         {
@@ -62,6 +68,20 @@ namespace MyLibrary
             {
                 MessageBox.Show("Image URL not valid");
                 txtAddImgUrl.Text = picBox1.ImageLocation;
+            }
+        }
+        private void TextBox_TextChanged(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txtAddTitle.Text) &&
+                !string.IsNullOrEmpty(txtAddAuthor.Text) &&
+                !string.IsNullOrEmpty(txtAddImgUrl.Text) &&
+                !string.IsNullOrEmpty(txtISBN.Text))
+            {
+                btnSave.Enabled = true;
+            }
+            else
+            {
+                btnSave.Enabled = false;
             }
         }
     }
