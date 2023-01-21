@@ -1,0 +1,9 @@
+﻿CREATE TABLE MyBooks
+(
+Id int IDENTITY(1,1) PRIMARY KEY,
+Title varchar (100),
+Author varchar (100),
+ISBN varchar (20),
+CoverImageUrl varchar(500),
+IsRead BIT DEFAULT 0
+);
